@@ -21,7 +21,7 @@ export default function TaskProvider({ children }) {
 
   const getTasks = async () => {
     try {
-      const response = await axios.get(`${baseUrl}/api/tasks/`);
+      const response = await axios.get(`${baseUrl}/api/tasks`);
       setAllTask(response.data); // save tasks in state
       return response.data;
     } catch (error) {
