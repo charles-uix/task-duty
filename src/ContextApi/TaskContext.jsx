@@ -1,15 +1,17 @@
 import { useState, useEffect, createContext } from "react";
-import axios from "axios";
+// import axios from "axios";
+import { api } from "../api/axios";
 
 export const TaskContext = createContext();
 
 export default function TaskProvider({ children }) {
   const [allTask, setAllTask] = useState([]);
-  const baseUrl = import.meta.env.VITE_BASE_URL;
+
+
 
   const createTask = async (formData) => {
     try {
-      const response = await axios.post(`${baseUrl}/api/tasks/`, formData);
+      const response = await api.post(`/api/tasks/`, formData);
       // update state immediately after creating
       setAllTask((prev) => [...prev, response.data]);
       return response.data;
@@ -21,7 +23,7 @@ export default function TaskProvider({ children }) {
 
   const getTasks = async () => {
     try {
-      const response = await axios.get(`${baseUrl}/api/tasks`);
+      const response = await api.get(`/api/tasks`);
       setAllTask(response.data); // save tasks in state
       return response.data;
     } catch (error) {
@@ -32,10 +34,10 @@ export default function TaskProvider({ children }) {
 
   const updateTask = async (id, formData) => {
     try {
-      const response = await axios.put(`${baseUrl}/api/tasks/${id}`, formData);
+      const response = await api.put(`/api/tasks/${id}`, formData);
       // update state with the modified task
       setAllTask((prev) =>
-        prev.map((task) => (task._id === id ? response.data : task))
+        prev.map((task) => (task._id === id ? response.data : task)),
       );
       return response.data;
     } catch (error) {
@@ -46,7 +48,7 @@ export default function TaskProvider({ children }) {
 
   const deleteTask = async (id) => {
     try {
-      await axios.delete(`${baseUrl}/api/tasks/${id}`);
+      await api.delete(`/api/tasks/${id}`);
       // remove from state
       setAllTask((prev) => prev.filter((task) => task._id !== id));
     } catch (error) {
@@ -56,9 +58,9 @@ export default function TaskProvider({ children }) {
   };
 
   // Optionally fetch tasks once when provider mounts
-  useEffect(() => {
-    getTasks();
-  }, []);
+  // useEffect(() => {
+  //   getTasks();
+  // }, []);
 
   return (
     <TaskContext.Provider

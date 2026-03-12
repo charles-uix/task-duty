@@ -1,13 +1,19 @@
-import React from 'react'
+import React, { useContext} from 'react'
 import Layout from '../Components/Layout'
 import desktop from '../assets/Images/desktop.png'
 import { useNavigate } from 'react-router-dom'
-
+import { UserContext } from '../ContextApi/UserContext'
 export default function Home() {
   const navigate = useNavigate();
+  const { user } = useContext(UserContext)
 
   const handelOnClick = () =>{
-    navigate('/all')
+    if (!user) {
+      navigate('/login')
+    }
+    else{
+      navigate('/all')
+    }
   }
   return (
     <Layout className="container mx-auto">
