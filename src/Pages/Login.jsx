@@ -1,17 +1,20 @@
-import React, { useContext, useState } from 'react';
-import Layout from '../Components/Layout';
-import { Link } from 'react-router-dom';
+import React, { useContext, useState } from "react";
+import Layout from "../Components/Layout";
+import { Link } from "react-router-dom";
 import { MdArrowBackIos } from "react-icons/md";
-import { useNavigate } from 'react-router-dom';
-import { UserContext } from '../ContextApi/UserContext';
-import { toast } from 'react-toastify';
+import { useNavigate } from "react-router-dom";
+import { UserContext } from "../ContextApi/UserContext";
+import { toast } from "react-toastify";
+import FullPageLoader from "../Components/PageLoader";
+
 export default function Login() {
-  const { login } = useContext(UserContext)
+  const { login } = useContext(UserContext);
   const [formData, setFormData] = useState({
     email: "",
-    password: ""
+    password: "",
   });
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleOnChange = (e) => {
@@ -30,15 +33,21 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if(!formValidation())return;
-     try {
-          await login(formData);  
-          toast.success("Login Succesful");
-          navigate("/");
-        } catch (error) {
-          toast.error(error.message);
-        }
+    if (!formValidation()) return;
+    try {
+      setLoading(true);
+
+      await login(formData);
+      toast.success("Login Succesful");
+      navigate("/");
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
+
+  if (loading) {
+    return <FullPageLoader />;
+  }
 
   return (
     <Layout>
