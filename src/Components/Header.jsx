@@ -5,10 +5,12 @@ import person from "../assets/Images/person.png";
 import { MdMenu, MdClose } from "react-icons/md";
 import { UserContext } from "../ContextApi/UserContext";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function Header() {
   const { user, logout } = useContext(UserContext);
   const [isOpen, setIsOpen] = useState(false);
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
   const navigate = useNavigate();
 
   return (
@@ -28,16 +30,12 @@ export default function Header() {
             <Link to="/all">
               <p>All Task</p>
             </Link>
-             <button
-                className="text-red-500 font-semibold cursor-pointer"
-                onClick={() => {
-                  logout();
-                  setIsOpen(false);
-                  navigate('/');
-                }}
-              >
-                Logout
-              </button>
+            <button
+              className="text-red-500 font-semibold cursor-pointer"
+              onClick={() => setShowLogoutModal(true)}
+            >
+              Logout
+            </button>
             <img src={person} alt="Profile" />
           </nav>
         ) : (
@@ -102,6 +100,42 @@ export default function Header() {
               </Link>
             </>
           )}
+        </div>
+      )}
+
+      {showLogoutModal && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black/40 z-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-80 text-center">
+            <h2 className="text-xl font-semibold mb-4 text-purple-500">
+              Confirm Logout
+            </h2>
+
+            <p className="mb-6 text-purple-500">
+              Are you sure you want to log out?
+            </p>
+
+            <div className="flex justify-between">
+              <button
+                className="bg-gray-300 px-4 py-2 rounded cursor-pointer"
+                onClick={() => setShowLogoutModal(false)}
+              >
+                Cancel
+              </button>
+
+              <button
+                className="bg-red-500 text-white px-4 py-2 rounded cursor-pointer"
+                onClick={() => {
+                  logout();
+                  setShowLogoutModal(false);
+                  setIsOpen(false);
+                  navigate("/");
+                  toast.success("You are now logged out");
+                }}
+              >
+                Logout
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </header>
