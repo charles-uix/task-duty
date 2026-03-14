@@ -11,6 +11,7 @@ export default function Header() {
   const { user, logout } = useContext(UserContext);
   const [isOpen, setIsOpen] = useState(false);
   const [showLogoutModal, setShowLogoutModal] = useState(false);
+
   const navigate = useNavigate();
 
   return (
@@ -81,7 +82,7 @@ export default function Header() {
                 onClick={() => {
                   setShowLogoutModal(true);
                   setIsOpen(false);
-                  toast.success("You are now logged out");
+                  // toast.success("You are now logged out");
                 }}
               >
                 Logout
@@ -95,7 +96,7 @@ export default function Header() {
                 </button>
               </Link>
               <Link to="/register" onClick={() => setIsOpen(false)}>
-                <button className="bg-purple-600 text-white py-2 px-4 rounded-md hover:bg-purple-700">
+                <button className="bg-purple-600 text-white py-2 px-2.5 rounded-md hover:bg-purple-700">
                   Register
                 </button>
               </Link>

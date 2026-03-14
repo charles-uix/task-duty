@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../ContextApi/UserContext";
 import { toast } from "react-toastify";
+import Loader from "../Components/Loader";
 
 export default function Register() {
   const { register } = useContext(UserContext);
@@ -16,6 +17,7 @@ export default function Register() {
     password: "",
     confirmPassword: "",
   });
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
@@ -40,16 +42,20 @@ export default function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formValidation()) return;
-     try {
+    try {
+      setLoading(true);
       await register(formData);
       toast.success("Registration Succesful");
       navigate("/login");
     } catch (error) {
-      toast.error( error.message);
+      toast.error(error.message);
+    } finally {
+      setLoading(false);
     }
   };
   return (
     <Layout>
+      <Loader loading={loading} />
       <form
         action=""
         className="flex flex-col justify-center items-center gap-12 container mx-auto"
@@ -96,7 +102,7 @@ export default function Register() {
             Password
           </span>
           <input
-            type="text"
+            type="password"
             name="password"
             value={formData.password}
             onChange={handleOnChange}
@@ -110,7 +116,7 @@ export default function Register() {
             Confirm Password
           </span>
           <input
-            type="text"
+            type="password"
             name="confirmPassword"
             value={formData.confirmPassword}
             onChange={handleOnChange}

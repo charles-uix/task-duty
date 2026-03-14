@@ -5,6 +5,7 @@ import { MdArrowBackIos } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../ContextApi/UserContext";
 import { toast } from "react-toastify";
+import Loader from "../Components/Loader";
 
 export default function Login() {
   const { login } = useContext(UserContext);
@@ -12,6 +13,7 @@ export default function Login() {
     email: "",
     password: "",
   });
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
@@ -33,16 +35,20 @@ export default function Login() {
     e.preventDefault();
     if (!formValidation()) return;
     try {
+      setLoading(true);
       await login(formData);
       toast.success("Login Succesful");
       navigate("/");
     } catch (error) {
       toast.error(error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <Layout>
+      <Loader loading={loading} />
       {error && <p>{error}</p>}
       <form
         className="flex flex-col justify-center items-center gap-12 container mx-auto"

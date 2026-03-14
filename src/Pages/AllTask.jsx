@@ -1,19 +1,28 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Layout from "../Components/Layout";
 import { Link } from "react-router-dom";
 import TaskCard from "../Components/TaskCard";
 import { TaskContext } from "../ContextApi/TaskContext.jsx";
+import Loader from "../Components/Loader.jsx";
 
 export default function AllTask() {
   const { allTask, getTasks } = useContext(TaskContext);
 
-  // Fetch tasks when this component mounts
-  useEffect(() => {
-    getTasks();
+  const [loading, setLoading] = useState(true); // start as true
+
+  useEffect(() => { 
+    const fetchTasks = async () => {
+      setLoading(true);
+      await getTasks();
+      setLoading(false); // stop loader regardless of task count
+    };
+
+    fetchTasks();
   }, []);
 
   return (
     <Layout>
+      <Loader loading={loading} />
       <div className="flex flex-col md:flex-row justify-between items-center gap-4 md:gap-0 py-4 px-6 md:px-58 mb-8">
         <p className="text-2xl md:text-4xl font-semibold">My Task</p>
         <Link to="/new">
@@ -22,7 +31,6 @@ export default function AllTask() {
           </button>
         </Link>
       </div>
-
 
       {/* Render all tasks */}
       <div className="flex flex-col gap-4">
@@ -37,7 +45,9 @@ export default function AllTask() {
             />
           ))
         ) : (
-          <p className="text-purple-600 text-center">No tasks yet. Add one above!</p>
+          <p className="text-purple-600 text-center">
+            No tasks yet. Add one above!
+          </p>
         )}
       </div>
     </Layout>
