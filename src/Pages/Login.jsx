@@ -49,7 +49,7 @@ export default function Login() {
   return (
     <Layout>
       <Loader loading={loading} />
-      {error && <p>{error}</p>}
+      {/* {error && <p>{error}</p>} */}
       <form
         className="flex flex-col justify-center items-center gap-12 container mx-auto"
         onSubmit={handleSubmit}
@@ -100,6 +100,8 @@ export default function Login() {
         >
           Login
         </button>
+
+        <p>Don't have an account? <Link to='/register' className="text-purple-500 underline">Click here to register.</Link></p>
       </form>
     </Layout>
   );
