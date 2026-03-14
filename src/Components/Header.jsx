@@ -79,8 +79,9 @@ export default function Header() {
               <button
                 className="text-red-500"
                 onClick={() => {
-                  logout();
+                  setShowLogoutModal(true);
                   setIsOpen(false);
+                  toast.success("You are now logged out");
                 }}
               >
                 Logout
