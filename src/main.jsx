@@ -1,19 +1,20 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.jsx'
-import { BrowserRouter } from 'react-router-dom'
-import TaskProvider from './ContextApi/TaskContext.jsx'
-import UserProvider from './ContextApi/UserContext.jsx'
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import "./index.css";
+import App from "./App.jsx";
+import { BrowserRouter } from "react-router-dom";
+import TaskProvider from "./ContextApi/TaskContext.jsx";
+import UserProvider from "./ContextApi/UserContext.jsx";
 
-createRoot(document.getElementById('root')).render(
+
+createRoot(document.getElementById("root")).render(
   <StrictMode>
-   <UserProvider>
-    <TaskProvider>
-     <BrowserRouter>
-    <App />
-    </BrowserRouter>
-   </TaskProvider>
-   </UserProvider>
-  </StrictMode>,
-)
+      <UserProvider>
+        <TaskProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </TaskProvider>
+      </UserProvider>
+  </StrictMode>
+);

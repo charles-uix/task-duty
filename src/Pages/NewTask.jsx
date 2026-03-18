@@ -68,18 +68,18 @@ export default function NewTask() {
           />
         </div>
 
-      <div className="relative w-80 md:w-160 lg:w-240 xl:w-275">
-       <span className="absolute -top-4 left-4 bg-white px-2 text-xl text-gray-400">
-        Description
-      </span>
-      <textarea
-        name="description"
-        value={formData.description}
-        onChange={handleOnChange}
-        className="border border-gray-400 w-full h-40 rounded-sm px-8 py-4 resize-none"
-        placeholder="Briefly describe your task..."
-      />
-      </div>
+        <div className="relative w-80 md:w-160 lg:w-240 xl:w-275">
+          <span className="absolute -top-4 left-4 bg-white px-2 text-xl text-gray-400">
+            Description
+          </span>
+          <textarea
+            name="description"
+            value={formData.description}
+            onChange={handleOnChange}
+            className="border border-gray-400 w-full h-40 rounded-sm px-8 py-4 resize-none"
+            placeholder="Briefly describe your task..."
+          />
+        </div>
 
         <div className="relative w-80 md:w-160 lg:w-240 xl:w-275">
           <span className="absolute -top-4 left-4 bg-white px-2 text-xl text-gray-400">
@@ -106,10 +106,7 @@ export default function NewTask() {
           Done
         </button>
 
-        <button
-          onClick={(e) => e.preventDefault()}
-          className="cursor-pointer"
-        >
+        <button onClick={(e) => e.preventDefault()} className="cursor-pointer">
           <span className="text-purple-400 underline font-semibold">
             Back to Top
           </span>
