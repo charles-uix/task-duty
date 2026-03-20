@@ -33,7 +33,7 @@ export default function AllTask() {
     <Layout>
       <Loader loading={loading} />
 
-      <div className="flex flex-col md:flex-row justify-between items-center gap-4 md:gap-0 py-4 px-6 md:px-58 mb-8">
+      <div className="flex flex-row justify-between items-center gap-4 md:gap-0 py-4 px-6 md:px-58 mb-8">
         <p className="text-2xl md:text-4xl font-semibold">My Task</p>
         <Link to="/new">
           <button className="text-purple-400 bg-white font-semibold text-lg md:text-xl cursor-pointer">
