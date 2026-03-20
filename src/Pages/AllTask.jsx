@@ -63,6 +63,7 @@ export default function AllTask() {
               title={task.title}
               description={task.description}
               tag={task.tag}
+              note={task.note}
             />
           ))
         ) : (

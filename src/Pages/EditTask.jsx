@@ -9,6 +9,7 @@ export default function EditTask() {
     title: "",
     description: "",
     tag: "",
+    note: "",
   });
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -23,6 +24,7 @@ export default function EditTask() {
         title: task.title,
         description: task.description,
         tag: task.tag,
+        note: task.note,
       });
     }
   }, [id, allTask]);
@@ -108,6 +110,19 @@ export default function EditTask() {
             <option value="urgent">Urgent</option>
             <option value="important">Important</option>
           </select>
+        </div>
+
+         <div className="relative w-80 md:w-160 lg:w-240 xl:w-275">
+          <span className="absolute -top-4 left-4 bg-white px-2 text-xl text-gray-400">
+            Notes (Optional)
+          </span>
+          <textarea
+            name="note"
+            value={formData.note}
+            onChange={handleOnChange}
+            className="border border-gray-400 w-full h-14 rounded-sm px-8 py-4 resize-none"
+            placeholder="Optional"
+          />
         </div>
 
         {error && <p className="text-red-500 font-semibold">{error}</p>}
