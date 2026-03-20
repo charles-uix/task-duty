@@ -40,7 +40,7 @@ export default function TaskCard({ _id, title, description, tag, note: initialNo
           >
             {tag}
           </p>
-          <div className="flex flex-col md:flex-row gap-3">
+          <div className="flex flex-row gap-3 ">
             <Link to={`/edit/${_id}`}>
               <button className="flex items-center gap-2 px-4 py-2 rounded-md bg-purple-500 hover:bg-purple-600 text-white font-medium shadow-sm transition duration-150 cursor-pointer">
                 <FaRegEdit size={18} /> Edit
